@@ -1,0 +1,188 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corpo */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  color: #333;
+}
+
+/* Layout principal */
+main {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* FORMULÁRIO */
+.Formulario {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.Formulario form {
+  display: flex;
+  flex-direction: column;
+}
+
+.Formulario label {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.Formulario input {
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.Formulario input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* Botões do formulário */
+.Formulario button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+#adicionar {
+  background-color: #2ecc71;
+  color: white;
+}
+
+#adicionar:hover {
+  background-color: #27ae60;
+}
+
+#limpar {
+  background-color: #95a5a6;
+  color: white;
+}
+
+#limpar:hover {
+  background-color: #7f8c8d;
+}
+
+#salvar {
+  background-color: #3498db;
+  color: white;
+}
+
+#salvar:hover {
+  background-color: #2980b9;
+}
+
+/* LISTA */
+.demostracao {
+  flex: 1;
+}
+
+.demostracao h1 {
+  margin-bottom: 20px;
+}
+
+/* CARD DO FILME */
+.catalogoTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Conteúdo do filme */
+.cata_format {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Imagem padronizada */
+.cata_format img {
+  width: 200px;
+  height: 170px;
+  object-fit: cover; /* corta sem distorcer */
+  border-radius: 8px;
+}
+
+/* Container de texto */
+.cata_format div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Título */
+.cata_format h2 {
+  font-size: 20px;
+  color: #222;
+}
+
+/* Infos */
+.cata_format p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Botões dos cards */
+.botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.botoes button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.excluir {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.excluir:hover {
+  background-color: #c0392b;
+}
+
+.editar {
+  background-color: #f1c40f;
+  color: black;
+}
+
+.editar:hover {
+  background-color: #d4ac0d;
+}
