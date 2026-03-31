@@ -4,12 +4,16 @@ const ano = document.querySelector("#ano")
 const url = document.querySelector("#url")
 const lista = document.querySelector('#lista')
 
-const btn_adicionar = document.querySelector('#adicionar')
+let btn_adicionar = document.querySelector('#adicionar')
 const btn_limpar = document.querySelector('#limpar')
-const btn_salvar = document.querySelector('#salvar')
 const form = document.querySelector('form');
 
+
 btn_adicionar.addEventListener('click', async (event) => {
+  if(btn_adicionar.textContent == "Salvar"){
+    editar()
+  }
+  else{
   event.preventDefault()
   if(form.checkValidity()){
     const filme = {
@@ -32,12 +36,17 @@ btn_adicionar.addEventListener('click', async (event) => {
   else{
     alert("preencha corretamente os dados")
   }
+}
 })
 
 async function atualizar(){
   const resposta = await fetch('http://localhost:3000/catalogo')
   const dados = await resposta.json()
-  lista.innerHTML = ""
+  if (dados.length === 0) {
+    lista.innerHTML = "<p>Nenhum filme cadastrado</p>"
+  }
+  else{
+    lista.innerHTML = ""
   dados.forEach(filme => {
     lista.innerHTML += `
       <div class = "catalogoTotal">
@@ -57,6 +66,8 @@ async function atualizar(){
       </div>  
   `
   });
+  }
+  
   editar()
   excluir()
 }
@@ -76,7 +87,6 @@ function excluir(){
 })
 }
 
-
 function editar(){
   const editarbtn = document.querySelectorAll('.editar')
   editarbtn.forEach(botao => {
@@ -89,28 +99,29 @@ function editar(){
       ano.value = dados.ano
       url.value =  dados.url
       titulo.focus()
+      btn_adicionar.textContent = "Salvar"
       if(form.checkValidity()){
-      btn_salvar.addEventListener('click', async () => {
-        const respostaPut = await fetch(`http://localhost:3000/catalogo/${id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            tituloEdit: titulo.value,
-            diretorEdit: diretor.value,
-            anoEdit: ano.value,
-            urlEdit: url.value
+        btn_adicionar.addEventListener('click', async () => {
+          const respostaPut = await fetch(`http://localhost:3000/catalogo/${id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              tituloEdit: titulo.value,
+              diretorEdit: diretor.value,
+              anoEdit: ano.value,
+              urlEdit: url.value
+            })
           })
-          
+          alert("Editado")
         })
-        alert("Editado")
-      })
-      }
-      else{
-        alert("preencha todos os dados")
-      }
+        }
+        else{
+          alert("preencha todos os dados")
+        }
     })
   })
 }
+
 atualizar()
