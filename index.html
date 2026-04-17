@@ -20,8 +20,12 @@
                 <label for="">Diretor</label>
                 <input type="text" id="diretor" required>
 
+                <label for="">Gênero</label>
+                <input type="text" id="genero" required>
+
                 <label for="">Ano de Lançamento</label>
-                <input type="number" min="1900" id="ano" required>
+                <input type="number" min="1900" id="ano" placeholder="1900" required>
+                
 
                 <label for="">URL</label>
                 <input type="text" id="url" required><br><br>
@@ -30,6 +34,11 @@
                 <button type="reset"  id="limpar">Limpar</button>
             </form>
         </div>
+        <div id="filtragem">
+            <input type="text" id="filtro" placeholder="Buscar filme...">
+            <button id="filtroBtn" type="button">Filtrar</button>
+        </div>
+        
 
         <div class="demostracao">
             <h1>Filmes em Catálogo</h1>

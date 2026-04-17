@@ -3,6 +3,7 @@ const diretor = document.querySelector("#diretor")
 const ano = document.querySelector("#ano")
 const url = document.querySelector("#url")
 const lista = document.querySelector('#lista')
+const genero = document.querySelector('#genero')
 
 let btn_adicionar = document.querySelector('#adicionar')
 const btn_limpar = document.querySelector('#limpar')
@@ -17,11 +18,11 @@ btn_adicionar.addEventListener('click', async (event) => {
   event.preventDefault()
   if(form.checkValidity()){
     const filme = {
-      id: Date.now(),
       nome: titulo.value,
       diretor: diretor.value,
       ano: ano.value,
-      url: url.value
+      url: url.value,
+      genero: genero.value
     }
     const resposta = await fetch('http://localhost:3000/catalogo', {
       method: 'POST',
@@ -55,6 +56,7 @@ async function atualizar(){
           
           <div>
             <h2>${filme.nome}</h2>
+            <h2>${filme.genero}</h2>
             <p><strong>Diretor:</strong> ${filme.diretor}</p>
             <p><strong>Ano:</strong> ${filme.ano}</p>
           </div>
@@ -98,6 +100,7 @@ function editar(){
       diretor.value = dados.diretor
       ano.value = dados.ano
       url.value =  dados.url
+      genero.value = dados.genero
       titulo.focus()
       btn_adicionar.textContent = "Salvar"
       if(form.checkValidity()){
@@ -111,7 +114,8 @@ function editar(){
               tituloEdit: titulo.value,
               diretorEdit: diretor.value,
               anoEdit: ano.value,
-              urlEdit: url.value
+              urlEdit: url.value,
+              generoEdit: genero.value
             })
           })
           alert("Editado")
@@ -123,5 +127,42 @@ function editar(){
     })
   })
 }
+
+const btnfiltro = document.querySelector('#filtroBtn')
+btnfiltro.addEventListener('click', async () => {
+  const nome = document.querySelector('#filtro').value
+  const respostaGet = await fetch(`http://localhost:3000/catalogo/${nome}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }})
+  const dados = await respostaGet.json()
+  lista.innerHTML = ""
+  if(!Array.isArray(dados) || dados.length  === 0){
+    lista.innerHTML = `<p>nada encontrado</p>`
+  }
+  else{
+  dados.forEach(filme => {
+    lista.innerHTML += `
+      <div class = "catalogoTotal">
+        <div class="cata_format">
+          <img src="${filme.url}">
+          
+          <div>
+            <h2>${filme.nome}</h2>
+            <h2>${filme.genero}</h2>
+            <p><strong>Diretor:</strong> ${filme.diretor}</p>
+            <p><strong>Ano:</strong> ${filme.ano}</p>
+          </div>
+        </div>
+        <div class="botoes">
+          <button class= "excluir" data-id="${filme.id}">Excluir</button>
+          <button class= "editar" type="button" data-id="${filme.id}">Editar</button>
+        </div>
+      </div>  
+  `
+  });
+  }
+});
 
 atualizar()

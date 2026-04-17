@@ -58,3 +58,32 @@
 .botoes button:hover {
   opacity: 0.85;
 }
+
+#filtragem {
+  margin-top: 60px;
+  display: flex;
+  gap: 10px;
+}
+
+#filtro {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 250px;
+}
+
+#filtro:focus {
+  border-color: #000000;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+#filtroBtn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+}
